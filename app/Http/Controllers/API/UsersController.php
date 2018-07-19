@@ -39,7 +39,9 @@ class UsersController extends Controller
     	if($user){
     		return new UsersResource($user);
     	}
+    }
 
-
+    public function getUsers(){
+    	return UsersResource::collection(User::all());
     }
 }
