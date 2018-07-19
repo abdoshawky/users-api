@@ -44,4 +44,12 @@ class UsersController extends Controller
     public function getUsers(){
     	return UsersResource::collection(User::all());
     }
+
+    public function getUser($id){
+    	$user = User::find($id);
+    	if(empty($user)){
+    		return response()->json(['message'=> 'user not found'], 404);
+    	}
+    	return new UsersResource($user);
+    }
 }

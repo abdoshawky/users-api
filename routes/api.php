@@ -13,5 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/users', 	'API\UsersController@createUser');
-Route::get('/users', 	'API\UsersController@getUsers');
+Route::post('/users', 		'API\UsersController@createUser');
+Route::get('/users', 		'API\UsersController@getUsers');
+Route::get('/users/{id}', 	'API\UsersController@getUser');
