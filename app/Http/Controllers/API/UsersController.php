@@ -52,4 +52,37 @@ class UsersController extends Controller
     	}
     	return new UsersResource($user);
     }
+
+    public function updateUser(Request $request,$id){
+    	$user = User::find($id);
+    	if(empty($user)){
+    		return response()->json(['message'=> 'user not found'], 404);
+    	}
+
+    	$input = $request->all();
+    	$rules = [
+    		'name'	=> 'required|max:190',
+    		'email'	=> 'required|email|unique:users,email,'.$id,
+    	];
+    	if($request->has('password')){
+    		$rules['password'] = 'required|min:8|max:190';
+    	}
+    	$validation = Validator::make($input, $rules);
+    	if($validation->fails()){
+    		$error = $validation->errors()->first();
+    		return response()->json(['message'=> $error], 400);
+    	}
+    	$data = [
+    		'name'		=> $input['name'],
+    		'email'		=> $input['email'],
+    	];
+    	if($request->has('password')){
+    		$date['password'] = $input['password'];
+    	}
+    	$user = $user->update($data);
+    	if($user){
+    		return new UsersResource(User::find($id));
+    	}
+
+    }
 }
