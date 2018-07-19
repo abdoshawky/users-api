@@ -37,7 +37,7 @@ class UsersController extends Controller
     	];
     	$user = User::create($data);
     	if($user){
-    		return new UsersResource($user);
+    		return new UsersResource($user, 201);
     	}
     }
 
@@ -84,5 +84,16 @@ class UsersController extends Controller
     		return new UsersResource(User::find($id));
     	}
 
+    }
+
+    public function deleteUser($id){
+    	$user = User::find($id);
+    	if(empty($user)){
+    		return response()->json(['message'=> 'user not found'], 404);
+    	}
+    	$delete = $user->delete();
+    	if($delete){
+    		return response()->json([], 204);
+    	}
     }
 }

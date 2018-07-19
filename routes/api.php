@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/users', 		'API\UsersController@createUser');
-Route::get('/users', 		'API\UsersController@getUsers');
-Route::get('/users/{id}', 	'API\UsersController@getUser');
-Route::patch('/users/{id}',	'API\UsersController@updateUser');
+Route::post('/users', 			'API\UsersController@createUser');
+Route::get('/users', 			'API\UsersController@getUsers');
+Route::get('/users/{id}', 		'API\UsersController@getUser');
+Route::patch('/users/{id}',		'API\UsersController@updateUser');
+Route::delete('/users/{id}',	'API\UsersController@deleteUser');
